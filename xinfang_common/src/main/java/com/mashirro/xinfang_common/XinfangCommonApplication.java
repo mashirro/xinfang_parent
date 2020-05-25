@@ -1,0 +1,13 @@
+package com.mashirro.xinfang_common;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class XinfangCommonApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(XinfangCommonApplication.class, args);
+	}
+
+}
