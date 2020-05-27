@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mashirro.xinfang_system.dao.UserMapper" >
+  <select id="selectUsers" resultMap="BaseResultMap" parameterType="com.mashirro.xinfang_system.entity.User">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where 1 = 1
+    <include refid="whereSql"/>
+  </select>
+
+  <sql id="whereSql">
+    <if test="userName != null and userName != '' ">
+      and user_name like CONCAT('%', #{userName, jdbcType=VARCHAR}, '%')
+    </if>
+  </sql>
+</mapper>
