@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserService {
     List<User> getUsers(User user);
+
+    User findUserByLoginAccount(String loginAccount);
 }

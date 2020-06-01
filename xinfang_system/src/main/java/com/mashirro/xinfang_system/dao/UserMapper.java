@@ -26,4 +26,11 @@ public interface UserMapper {
      * @return
      */
     List<User> selectUsers(User user);
+
+    /**
+     * 根据用户账号查询用户
+     * @param loginAccount
+     * @return
+     */
+    User findUserByLoginAccount(String loginAccount);
 }

@@ -14,4 +14,11 @@
       and user_name like CONCAT('%', #{userName, jdbcType=VARCHAR}, '%')
     </if>
   </sql>
+
+  <select id="findUserByLoginAccount" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where login_account = #{loginAccount, jdbcType=VARCHAR}
+  </select>
 </mapper>
