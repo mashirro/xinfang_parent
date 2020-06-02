@@ -31,6 +31,11 @@ public class UserController {
     private static final SecureRandomNumberGenerator generator = new SecureRandomNumberGenerator();
 
 
+    /**
+     * 条件查询用户列表
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
     public Result getUsers(@RequestBody User user) {
@@ -43,6 +48,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public Result register(@RequestBody User user) {
@@ -67,6 +77,12 @@ public class UserController {
         }
     }
 
+    /**
+     * 用户登录
+     * @param loginAccount
+     * @param password
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Result login(String loginAccount, String password) {
