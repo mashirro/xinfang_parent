@@ -83,7 +83,7 @@ public class UserRealm extends AuthorizingRealm {
     public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
         HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
         matcher.setHashAlgorithmName(PasswordUtil.ALGORITHM_NAME);
-        //参看HashedCredentialsMatcher源码,因为我们使用了toHex()!
+        //参看HashedCredentialsMatcher源码,因为我们使用了toHex(),这里可以不用配置,因为默认true
         matcher.setStoredCredentialsHexEncoded(true);
         matcher.setHashIterations(PasswordUtil.HASHITERATIONS);
         super.setCredentialsMatcher(matcher);
