@@ -1,6 +1,7 @@
 package com.mashirro.xinfang_system.controller;
 
 
+import com.mashirro.xinfang_common.pojo.Constants;
 import com.mashirro.xinfang_common.pojo.Result;
 import com.mashirro.xinfang_system.entity.User;
 import com.mashirro.xinfang_system.service.UserService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -34,6 +36,24 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             return Result.error("查询用户列表失败");
+        }
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ResponseBody
+    public Result register(@RequestBody User user) {
+        try {
+            user.setId(UUID.randomUUID().toString());
+            user.setIsDeleted(Constants.ZERO_NUMBER);
+            user.setIsLocked(Constants.ZERO_NUMBER);
+            String message = userService.register(user);
+            if (message != null) {
+                return Result.error(message);
+            }
+            return Result.success("用户注册成功", null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("注册失败");
         }
     }
 
