@@ -7,8 +7,7 @@ import com.mashirro.xinfang_common.util.shiro.PasswordUtil;
 import com.mashirro.xinfang_system.entity.User;
 import com.mashirro.xinfang_system.service.UserService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,9 +75,18 @@ public class UserController {
         try {
             currentUser.login(token);
             return Result.success("登陆成功", null);
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
-            return Result.error("登陆失败");
+        } catch (UnknownAccountException e1) {
+            e1.printStackTrace();
+            return Result.error("账户不存在!");
+        } catch (LockedAccountException e2){
+            e2.printStackTrace();
+            return Result.error("账户被锁定!");
+        } catch (IncorrectCredentialsException e3){
+            e3.printStackTrace();
+            return Result.error("密码不正确!");
+        } catch (AuthenticationException e4){
+            e4.printStackTrace();
+            return Result.error("登陆出现异常,请联系管理员!");
         }
     }
 
