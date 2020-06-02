@@ -21,4 +21,8 @@ public class Constants {
 
     //rabbitMQ队列名
     public static final String RABBITMQ_QUEUE_NAME = "sms";
+
+    public static final Integer ZERO_NUMBER = 0;
+
+    public static final Integer ONE_NUMBER = 1;
 }
