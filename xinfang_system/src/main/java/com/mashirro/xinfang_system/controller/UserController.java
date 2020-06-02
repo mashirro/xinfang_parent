@@ -106,4 +106,19 @@ public class UserController {
         }
     }
 
+    /**
+     * 注销(登出)
+     */
+    @RequestMapping("/logout")
+    @ResponseBody
+    public Result logout(){
+        try {
+            SecurityUtils.getSubject().logout();
+            return Result.success("登出成功!",null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("登出失败!");
+        }
+    }
+
 }
