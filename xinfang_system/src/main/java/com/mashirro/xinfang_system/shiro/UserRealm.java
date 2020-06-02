@@ -54,7 +54,10 @@ public class UserRealm extends AuthorizingRealm {
         UsernamePasswordToken upToken = (UsernamePasswordToken) token;
         User user = userService.findUserByLoginAccount(upToken.getUsername());
         if (user == null) {
-            throw new UnknownAccountException();// 没找到帐号
+            throw new UnknownAccountException();    //没找到帐号
+        }
+        if (user.getIsLocked() == 1) {
+            throw new LockedAccountException(); //账号被锁
         }
         //我们这里不需要进行凭证匹配,因为返回AuthenticationInfo实例后,会在AuthenticatingRealm的getAuthenticationInfo中进行凭证匹配this.assertCredentialsMatch(token, info);具体请参看源码
 //        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getLoginAccount(), // 用户帐号
@@ -73,6 +76,7 @@ public class UserRealm extends AuthorizingRealm {
     /**
      * 不配置的话默认使用SimpleCredentialsMatcher
      * 因为您要对用户的密码进行SHA-256散列，所以需要告诉Shiro使用适当的HashedCredentialsMatcher来匹配您的散列首选项
+     *
      * @param credentialsMatcher
      */
     @Override
