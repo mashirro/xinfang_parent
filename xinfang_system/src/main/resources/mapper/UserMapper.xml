@@ -6,15 +6,16 @@
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="login_account" property="loginAccount" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
     <result column="telephone" property="telephone" jdbcType="VARCHAR" />
     <result column="is_locked" property="isLocked" jdbcType="INTEGER" />
     <result column="is_deleted" property="isDeleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_name, login_account, password, telephone, is_locked, is_deleted
+    id, user_name, login_account, password, salt, telephone, is_locked, is_deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=VARCHAR}
@@ -24,12 +25,12 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.mashirro.xinfang_system.entity.User" >
-    insert into user (id, user_name, login_account, 
-      password, telephone, is_locked, 
-      is_deleted)
-    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{loginAccount,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{isLocked,jdbcType=INTEGER}, 
-      #{isDeleted,jdbcType=INTEGER})
+    insert into user (id, user_name, login_account,
+    password, salt, telephone,
+    is_locked, is_deleted)
+    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{loginAccount,jdbcType=VARCHAR},
+    #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR},
+    #{isLocked,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mashirro.xinfang_system.entity.User" >
     insert into user
@@ -45,6 +46,9 @@
       </if>
       <if test="password != null" >
         password,
+      </if>
+      <if test="salt != null" >
+        salt,
       </if>
       <if test="telephone != null" >
         telephone,
@@ -69,6 +73,9 @@
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
       <if test="telephone != null" >
         #{telephone,jdbcType=VARCHAR},
       </if>
@@ -92,6 +99,9 @@
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
       <if test="telephone != null" >
         telephone = #{telephone,jdbcType=VARCHAR},
       </if>
@@ -109,6 +119,7 @@
     set user_name = #{userName,jdbcType=VARCHAR},
       login_account = #{loginAccount,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
       telephone = #{telephone,jdbcType=VARCHAR},
       is_locked = #{isLocked,jdbcType=INTEGER},
       is_deleted = #{isDeleted,jdbcType=INTEGER}

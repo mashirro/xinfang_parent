@@ -15,6 +15,8 @@ public class User {
 
     private Integer isDeleted;
 
+    private String salt;
+
     public String getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class User {
 
     public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

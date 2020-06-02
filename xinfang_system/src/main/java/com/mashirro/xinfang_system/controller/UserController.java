@@ -3,11 +3,13 @@ package com.mashirro.xinfang_system.controller;
 
 import com.mashirro.xinfang_common.pojo.Constants;
 import com.mashirro.xinfang_common.pojo.Result;
+import com.mashirro.xinfang_common.util.shiro.PasswordUtil;
 import com.mashirro.xinfang_system.entity.User;
 import com.mashirro.xinfang_system.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    //我们将用一个随机数发生器来产生盐,这比使用用户名作为salt或者根本没有salt要安全得多。
+    private static final SecureRandomNumberGenerator generator = new SecureRandomNumberGenerator();
 
 
     @RequestMapping(value = "/list", method = RequestMethod.POST)
@@ -46,6 +51,12 @@ public class UserController {
             user.setId(UUID.randomUUID().toString());
             user.setIsDeleted(Constants.ZERO_NUMBER);
             user.setIsLocked(Constants.ZERO_NUMBER);
+
+            //我们将用一个随机数发生器来产生盐,这比使用用户名作为salt或者根本没有salt要安全得多。toHex:返回基础包装字节数组的十六进制格式的String表示形式。
+            String salt = generator.nextBytes().toHex();
+            user.setSalt(salt);
+            user.setPassword(PasswordUtil.getHashedPassword(user.getPassword(), salt));
+
             String message = userService.register(user);
             if (message != null) {
                 return Result.error(message);
@@ -70,4 +81,5 @@ public class UserController {
             return Result.error("登陆失败");
         }
     }
+
 }
