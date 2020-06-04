@@ -1,8 +1,5 @@
 package com.mashirro.xinfang_system.shiro;
 
-
-import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.SessionManager;
@@ -53,19 +50,6 @@ public class ShiroConfig {
          */
         sessionManager.setGlobalSessionTimeout(10000L);     //10秒钟(单位:毫秒值)
         return sessionManager;
-    }
-
-
-    /**
-     * 配置EhCacheManager,启用EHCache对Shiro的SessionManagement的支持。
-     * @return
-     */
-    @Bean
-    public CacheManager cacheManager(){
-        EhCacheManager cacheManager = new EhCacheManager();
-        //配置文件路径
-        //ehCacheManager.setCacheManagerConfigFile();
-        return cacheManager;
     }
 
     /**
