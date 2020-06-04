@@ -29,6 +29,7 @@ public class ShiroConfig {
     public SecurityManager securityManager(UserRealm userRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(userRealm);
+        //配置shiro本地web会话管理器
         securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
@@ -49,7 +50,6 @@ public class ShiroConfig {
          * 任何会话保持空闲(未使用，它的lastAccessedTime未更新)30分钟或更长时间，则认为该会话已过期，不允许再使用它。
          */
         sessionManager.setGlobalSessionTimeout(10000L);     //10秒钟(单位:毫秒值)
-        //sessionManager.setSessionDAO();
         return sessionManager;
     }
 
