@@ -1,14 +1,12 @@
 package com.mashirro.xinfang_system.shiro;
 
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.HashMap;
 
 
@@ -43,12 +41,12 @@ public class ShiroConfig {
      */
     @Bean
     public SessionManager sessionManager() {
-        DefaultSessionManager sessionManager = new DefaultWebSessionManager();
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         /**
          * 默认情况下，Shiro的SessionManager实现默认为30分钟的会话超时。也就是说，如果创建的
          * 任何会话保持空闲(未使用，它的lastAccessedTime未更新)30分钟或更长时间，则认为该会话已过期，不允许再使用它。
          */
-        sessionManager.setGlobalSessionTimeout(10000L);     //10秒钟(单位:毫秒值)
+        sessionManager.setGlobalSessionTimeout(120000L);     //120秒钟(单位:毫秒值)
         return sessionManager;
     }
 
