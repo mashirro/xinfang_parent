@@ -1,13 +1,13 @@
-package com.mashirro.xinfang_system;
+package com.mashirro.xinfang_framework;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class XinfangSystemApplication {
+public class XinfangFrameworkApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(XinfangSystemApplication.class, args);
+		SpringApplication.run(XinfangFrameworkApplication.class, args);
 	}
 
 }

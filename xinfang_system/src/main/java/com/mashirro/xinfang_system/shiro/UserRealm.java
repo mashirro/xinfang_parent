@@ -1,5 +1,6 @@
 package com.mashirro.xinfang_system.shiro;
 
+
 import com.mashirro.xinfang_common.util.shiro.PasswordUtil;
 import com.mashirro.xinfang_system.entity.User;
 import com.mashirro.xinfang_system.service.UserService;

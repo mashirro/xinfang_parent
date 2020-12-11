@@ -3,7 +3,6 @@ package com.mashirro.xinfang_system.dao;
 
 import com.mashirro.xinfang_system.entity.User;
 import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
 
 

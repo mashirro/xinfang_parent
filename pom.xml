@@ -18,9 +18,13 @@
 	</properties>
 
 	<modules>
-		<!-- 公共模块 -->
+		<!-- common通用工具模块 -->
 		<module>xinfang_common</module>
-		<!-- 系统管理微服务模块 -->
+		<!-- framework框架核心模块 -->
+		<module>xinfang_framework</module>
+		<!-- web服务入口模块 -->
+		<module>xinfang_admin</module>
+		<!-- system服务模块 -->
 		<module>xinfang_system</module>
 	</modules>
 
