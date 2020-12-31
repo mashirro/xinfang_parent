@@ -4,8 +4,8 @@ package com.mashirro.xinfang_admin.controller.common;
 import com.mashirro.xinfang_common.pojo.Constants;
 import com.mashirro.xinfang_common.pojo.Result;
 import com.mashirro.xinfang_framework.shiro.utils.PasswordUtil;
-import com.mashirro.xinfang_system.entity.User;
-import com.mashirro.xinfang_system.service.UserService;
+import com.mashirro.xinfang_framework.entity.SysUser;
+import com.mashirro.xinfang_framework.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.UUID;
 
 @Controller
-public class RegisterController {
+public class SysRegisterController {
 
     @Autowired
-    private UserService userService;
+    private SysUserService sysUserService;
 
     /**
      * 用户注册
      *
-     * @param user
+     * @param sysUser
      * @return
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public Result register(@RequestBody User user) {
+    public Result register(@RequestBody SysUser sysUser) {
         try {
-            user.setId(UUID.randomUUID().toString());
-            user.setIsDeleted(Constants.ZERO_NUMBER);
-            user.setIsLocked(Constants.ZERO_NUMBER);
+            sysUser.setId(UUID.randomUUID().toString());
+            sysUser.setIsDeleted(Constants.ZERO_NUMBER);
+            sysUser.setIsLocked(Constants.ZERO_NUMBER);
             String salt = PasswordUtil.generateSalt();
-            user.setSalt(salt);
-            user.setPassword(PasswordUtil.getHashedPassword(user.getPassword(), salt));
-            String message = userService.register(user);
+            sysUser.setSalt(salt);
+            sysUser.setPassword(PasswordUtil.getHashedPassword(sysUser.getPassword(), salt));
+            String message = sysUserService.register(sysUser);
             if (message != null) {
                 return Result.error(message);
             }

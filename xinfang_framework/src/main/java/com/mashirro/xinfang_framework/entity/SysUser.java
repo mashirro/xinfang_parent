@@ -1,6 +1,6 @@
-package com.mashirro.xinfang_system.entity;
+package com.mashirro.xinfang_framework.entity;
 
-public class User {
+public class SysUser {
     private String id;
 
     private String userName;

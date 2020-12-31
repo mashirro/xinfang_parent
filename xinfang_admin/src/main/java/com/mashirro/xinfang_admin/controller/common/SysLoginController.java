@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-public class LoginController {
+public class SysLoginController {
 
     /**
      * 用户登录

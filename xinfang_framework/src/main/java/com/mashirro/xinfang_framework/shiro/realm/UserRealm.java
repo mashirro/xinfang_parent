@@ -1,9 +1,9 @@
-package com.mashirro.xinfang_system.shiro;
+package com.mashirro.xinfang_framework.shiro.realm;
 
 
 import com.mashirro.xinfang_framework.shiro.utils.PasswordUtil;
-import com.mashirro.xinfang_system.entity.User;
-import com.mashirro.xinfang_system.service.UserService;
+import com.mashirro.xinfang_framework.entity.SysUser;
+import com.mashirro.xinfang_framework.service.SysUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -26,7 +26,7 @@ public class UserRealm extends AuthorizingRealm {
     private final static Logger logger = LoggerFactory.getLogger(UserRealm.class);
 
     @Autowired
-    private UserService userService;
+    private SysUserService sysUserService;
 
     /**
      * 授权
@@ -38,8 +38,8 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String username = (String) principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        //authorizationInfo.setRoles(userService.findRoles(username));
-        //authorizationInfo.setStringPermissions(userService.findPermissions(username));
+        //authorizationInfo.setRoles(sysUserService.findRoles(username));
+        //authorizationInfo.setStringPermissions(sysUserService.findPermissions(username));
         return authorizationInfo;
     }
 
@@ -53,22 +53,22 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         UsernamePasswordToken upToken = (UsernamePasswordToken) token;
-        User user = userService.findUserByLoginAccount(upToken.getUsername());
-        if (user == null) {
+        SysUser sysUser = sysUserService.findUserByLoginAccount(upToken.getUsername());
+        if (sysUser == null) {
             throw new UnknownAccountException();    //没找到帐号
         }
-        if (user.getIsLocked() == 1) {
+        if (sysUser.getIsLocked() == 1) {
             throw new LockedAccountException(); //账号被锁
         }
         //我们这里不需要进行凭证匹配,因为返回AuthenticationInfo实例后,会在AuthenticatingRealm的getAuthenticationInfo中进行凭证匹配this.assertCredentialsMatch(token, info);具体请参看源码
-//        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getLoginAccount(), // 用户帐号
-//                user.getPassword(), // 密码
+//        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(sysUser.getLoginAccount(), // 用户帐号
+//                sysUser.getPassword(), // 密码
 //                getName() // realm name
 //        );
 
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getLoginAccount(),    //帐号
-                user.getPassword(),     //密码
-                ByteSource.Util.bytes(user.getSalt()),  //盐
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(sysUser.getLoginAccount(),    //帐号
+                sysUser.getPassword(),     //密码
+                ByteSource.Util.bytes(sysUser.getSalt()),  //盐
                 getName()); // realm name
 
         return authenticationInfo;

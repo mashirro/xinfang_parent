@@ -13,6 +13,18 @@
 
 
 	<dependencies>
+		<!-- spring‐boot‐starter‐data‐redis,默认解析Lettuce -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<!-- Spring提供LettuceConnectionFactory来获取连接。要获得池连接工厂，我们需要在类路径上提供commons-pool2 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+		</dependency>
+
 		<!-- Hutool是一个小而全的Java工具类库 -->
 		<dependency>
 			<groupId>cn.hutool</groupId>

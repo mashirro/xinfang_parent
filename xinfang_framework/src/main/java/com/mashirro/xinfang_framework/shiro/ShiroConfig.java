@@ -1,5 +1,6 @@
-package com.mashirro.xinfang_system.shiro;
+package com.mashirro.xinfang_framework.shiro;
 
+import com.mashirro.xinfang_framework.shiro.realm.UserRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;

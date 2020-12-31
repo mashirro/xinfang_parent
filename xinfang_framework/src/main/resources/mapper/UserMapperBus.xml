@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mashirro.xinfang_system.dao.UserMapper" >
-  <select id="selectUsers" resultMap="BaseResultMap" parameterType="com.mashirro.xinfang_system.entity.User">
+<mapper namespace="com.mashirro.xinfang_framework.dao.SysUserMapper" >
+  <select id="selectUsers" resultMap="BaseResultMap" parameterType="com.mashirro.xinfang_framework.entity.SysUser">
     select
     <include refid="Base_Column_List" />
     from sys_user
