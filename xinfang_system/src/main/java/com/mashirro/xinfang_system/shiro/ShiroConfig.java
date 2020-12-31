@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.LinkedHashMap;
 
 
+
 /**
  * shiro配置类
  */
@@ -38,6 +39,7 @@ public class ShiroConfig {
      * 它本质上是Shiro的会话API与servlet容器之间的桥梁，除此之外几乎不做其他事情。
      * (2)要为您的web应用程序启用本地会话管理，您需要配置一个支持本地web的会话管理器，以覆盖默认的基于servlet容器的会话管理器。
      * 您可以通过在Shiro的SecurityManager上配置一个DefaultWebSessionManager实例来实现这一点。
+     *
      * @return
      */
     @Bean
@@ -62,8 +64,7 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-//        filterChainDefinitionMap.put("/user/login", "anon");
-//        filterChainDefinitionMap.put("/user/list", "authc");
+        filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/**", "anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

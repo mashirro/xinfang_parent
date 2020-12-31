@@ -1,7 +1,7 @@
 package com.mashirro.xinfang_system.shiro;
 
 
-import com.mashirro.xinfang_common.util.shiro.PasswordUtil;
+import com.mashirro.xinfang_framework.shiro.utils.PasswordUtil;
 import com.mashirro.xinfang_system.entity.User;
 import com.mashirro.xinfang_system.service.UserService;
 import org.apache.shiro.authc.*;

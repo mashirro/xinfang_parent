@@ -1,4 +1,4 @@
-package com.mashirro.xinfang_admin.controller;
+package com.mashirro.xinfang_admin.controller.common;
 
 import com.mashirro.xinfang_common.pojo.Constants;
 import com.mashirro.xinfang_common.pojo.Result;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import sun.misc.BASE64Encoder;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
